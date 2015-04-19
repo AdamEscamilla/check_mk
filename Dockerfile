@@ -57,6 +57,7 @@ RUN apk-install g++ make && \
    cd check_mk-$CHECKMK_VERSION && \
    ./setup.sh --yes && \
    apk del g++ make && \
+   echo "all_hosts = [ '10.63.236.34' ]" > /etc/check_mk/main.mk && \
    rm -fr /check_mk-$CHECKMK_VERSION /root/.check_mk_setup.conf
    
 RUN apk-install g++ make flex apache2-dev python-dev && \
@@ -81,7 +82,7 @@ COPY nagios/commands.cfg /usr/local/nagios/etc/objects/
 COPY nagios/nagios.init /etc/init.d/nagios
 COPY supervisord.conf /etc/supervisord.conf
 RUN chmod 755 /etc/init.d/nagios
-RUN mkdir /var/run/rrdcached
+RUN mkdir /var/run/rrdcached /data/rrdcached.journal
 RUN chown nagios.nagios -R /usr/local/nagios/var/rw /data /var/run/rrdcached
 RUN chmod g+s /usr/local/nagios/var/rw
 RUN chmod g+w -R /var/lib/mkeventd /etc/check_mk /var/lib/check_mk

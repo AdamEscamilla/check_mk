@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case "$1" in
+        restart)
+                /usr/bin/supervisorctl restart nagios
+                ;;
+        reload|force-reload)
+                /usr/bin/supervisorctl restart nagios
+                ;;
+esac

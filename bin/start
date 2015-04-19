@@ -1,0 +1,8 @@
+#!/bin/bash
+
+chown nagios.nagios -R /data /usr/local/nagios/var /etc/check_mk /var/lib/check_mk /var/lib/mkeventd
+chmod g+w -R /var/lib/mkeventd /etc/check_mk /var/lib/check_mk
+rm -fr /usr/local/nagios/var/rw/mkeventd/pid
+#/usr/bin/cmk -II localhost
+/usr/bin/cmk -U
+/usr/bin/supervisord

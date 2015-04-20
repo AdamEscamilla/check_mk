@@ -22,14 +22,10 @@ $conf['temp'] = "/var/tmp";
 $conf['nagios_base'] = "/nagios/cgi-bin";
 $conf['multisite_base_url'] = "/check_mk";
 $conf['multisite_site'] = "";
-$conf['auth_enabled'] = TRUE;
-$conf['auth_multisite_enabled'] = TRUE;
-$conf['auth_multisite_serials'] = "/usr/local/nagios/etc/auth.serials";
-$conf['auth_multisite_secret'] = "/usr/local/nagios/etc/auth.secret";
-$conf['auth_multisite_login_url'] = "https://azoptimus.solint.net/check_mk/";
+$conf['auth_enabled'] = FALSE;
 $conf['livestatus_socket'] = "unix:/usr/local/nagios/var/rw/live";
-$conf['allowed_for_all_services'] = "jortiz,sbhagavatula,jshumaker,asmith";
-$conf['allowed_for_all_hosts'] = "jortiz,sbhagavatula,jshumaker,asmith";
+$conf['allowed_for_all_services'] = "EVERYONE";
+$conf['allowed_for_all_hosts'] = "EVERYONE";
 $conf['allowed_for_service_links'] = "EVERYONE";
 $conf['allowed_for_host_search'] = "EVERYONE";
 $conf['allowed_for_host_overview'] = "EVERYONE";
@@ -71,10 +67,7 @@ $scheme['RdYlBu']   = array ('#A50026','#D73027','#F46D43','#FDAE61','#FEE090','
 $scheme['RdYlGn']   = array ('#A50026','#D73027','#F46D43','#FDAE61','#FEE08B','#D9EF8B','#A6D96A','#66BD63','#1A9850','#006837');
 $scheme['Spectral'] = array ('#9E0142','#D53E4F','#F46D43','#FDAE61','#FEE08B','#E6F598','#ABDDA4','#66C2A5','#3288BD','#5E4FA2');
 $scheme['Paired']   = array ('#A6CEE3','#1F78B4','#B2DF8A','#33A02C','#FB9A99','#E31A1C','#FDBF6F','#FF7F00','#CAB2D6','#6A3D9A');
-$scheme['mixed1']   = array ('#8C510A','#2166ac','#BF812D','#4393c3','#DFC27D','#92c5de','#F6E8C3','#d1e5f0',
-                             '#fddbc7','#C7EAE5','#f4a582','#80CDC1','#d6604d','#35978F','#b2182b','#01665E');
-$scheme['mixed2']   = array ('#b2182b','#2166ac','#d6604d','#4393c3','#f4a582','#92c5de','#fddbc7','#d1e5f0',
-                             '#F6E8C3','#C7EAE5','#DFC27D','#80CDC1','#BF812D','#35978F','#8C510A','#01665E');
-$scheme['mixed3']   = array ('#67001F','#80CDC1','#B2182B','#35978F','#D6604D','#01665E','#F4A582','#003C30',
-                             '#FDDBC7','#92C5DE','#D1E5F0','#2166AC','#4393C3','#8C510A','#053061','#BF812D');
+$scheme['mixed1']   = array ('#8C510A','#2166ac','#BF812D','#4393c3','#DFC27D','#92c5de','#F6E8C3','#d1e5f0','#fddbc7','#C7EAE5','#f4a582','#80CDC1','#d6604d','#35978F','#b2182b','#01665E');
+$scheme['mixed2']   = array ('#b2182b','#2166ac','#d6604d','#4393c3','#f4a582','#92c5de','#fddbc7','#d1e5f0','#F6E8C3','#C7EAE5','#DFC27D','#80CDC1','#BF812D','#35978F','#8C510A','#01665E');
+$scheme['mixed3']   = array ('#67001F','#80CDC1','#B2182B','#35978F','#D6604D','#01665E','#F4A582','#003C30','#FDDBC7','#92C5DE','#D1E5F0','#2166AC','#4393C3','#8C510A','#053061','#BF812D');
 ?>

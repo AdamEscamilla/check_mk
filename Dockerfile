@@ -1,6 +1,5 @@
 FROM gliderlabs/alpine
 
-
 ENV NAGIOS_VERSION 4.1.0rc1
 ENV NAGIOS_PLUGINS_VERSION 2.0.3
 ENV PNP4NAGIOS_VERSION  0.6.24
@@ -11,7 +10,7 @@ ENV NAGIOSPLUGIN_URL http://nagios-plugins.org/download/nagios-plugins-$NAGIOS_P
 ENV PNP4NAGIOS_URL http://downloads.sourceforge.net/project/pnp4nagios/PNP-0.6/pnp4nagios-$PNP4NAGIOS_VERSION.tar.gz
 ENV CHECKMK_URL http://mathias-kettner.com/download/check_mk-$CHECKMK_VERSION.tar.gz
 
-RUN apk-install bash sudo curl perl php python apache2 php-apache2 rrdtool gd-dev libpng-dev jpeg-dev supervisor
+RUN apk-install bash sudo curl perl php python apache2 php-apache2 php-iconv rrdtool gd-dev libpng-dev jpeg-dev supervisor
 
 RUN addgroup nagios
 RUN adduser -G nagios -g "Nagios" -s /bin/bash -D nagios
@@ -51,13 +50,12 @@ RUN apk-install g++ make && \
 COPY pnp4nagios/ /usr/local/pnp4nagios/etc/
 
 COPY check_mk/check_mk_setup.conf /root/.check_mk_setup.conf
-RUN sed -i "s/NAGIOS_VERSION/$NAGIOS_VERSION/g" /root/.check_mk_setup.conf
+RUN sed "s/NAGIOS_VERSION/$NAGIOS_VERSION/g" -i /root/.check_mk_setup.conf
 RUN apk-install g++ make && \ 
    curl -L -k $CHECKMK_URL | gzip -d |tar -xf - && \ 
    cd check_mk-$CHECKMK_VERSION && \
    ./setup.sh --yes && \
    apk del g++ make && \
-   echo "all_hosts = [ '10.63.236.34' ]" > /etc/check_mk/main.mk && \
    rm -fr /check_mk-$CHECKMK_VERSION /root/.check_mk_setup.conf
    
 RUN apk-install g++ make flex apache2-dev python-dev && \
@@ -82,8 +80,8 @@ COPY nagios/commands.cfg /usr/local/nagios/etc/objects/
 COPY nagios/nagios.init /etc/init.d/nagios
 COPY supervisord.conf /etc/supervisord.conf
 RUN chmod 755 /etc/init.d/nagios
-RUN mkdir /var/run/rrdcached /data/rrdcached.journal
-RUN chown nagios.nagios -R /usr/local/nagios/var/rw /data /var/run/rrdcached
+RUN mkdir /var/run/rrdcached /data/rrdcached.journal /data/nagios.perfdump
+RUN chown nagios.nagios -R /usr/local/nagios/var/rw /data /var/run/rrdcached /usr/local/pnp4nagios/etc
 RUN chmod g+s /usr/local/nagios/var/rw
 RUN chmod g+w -R /var/lib/mkeventd /etc/check_mk /var/lib/check_mk
 
